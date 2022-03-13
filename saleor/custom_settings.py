@@ -5,6 +5,8 @@ Write here any settings customization to avoid merge conflicts with main file
 saleor.settings.py
 """
 
+from sentry_sdk.integrations.redis import RedisIntegration
+
 from .settings import *
 
 SILENCED_SYSTEM_CHECKS = [
@@ -42,3 +44,9 @@ INSTALLED_APPS += [
 AUTH_PASSWORD_VALIDATORS += [
     # Insert here any custom password validator based on customer requests
 ]
+
+# Add RedisIntegration to Sentry integrations if not already done.
+if RedisIntegration.__name__ not in [
+    i.__class__.__name__ for i in SENTRY_OPTS["integrations"]
+]:
+    SENTRY_OPTS["integrations"].append(RedisIntegration())
