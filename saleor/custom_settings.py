@@ -5,7 +5,16 @@ Write here any settings customization to avoid merge conflicts with main file
 saleor.settings.py
 """
 
+import os
+
 from sentry_sdk.integrations.redis import RedisIntegration
+
+# RSA key patch
+RSA_PRIVATE_KEY_PATH = os.environ.pop("RSA_PRIVATE_KEY_PATH", '')
+if RSA_PRIVATE_KEY_PATH and os.path.exists(RSA_PRIVATE_KEY_PATH):
+    with open(RSA_PRIVATE_KEY_PATH, "r", encoding="utf-8") as f:
+        os.environ.setdefault("RSA_PRIVATE_KEY", f.read())
+        os.environ.pop("RSA_PRIVATE_PASSWORD", None)
 
 from .settings import *
 
