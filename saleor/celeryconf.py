@@ -21,7 +21,7 @@ def setup_celery_logging(loglevel=None, **kwargs):
         logging.getLogger(CELERY_LOGGER_NAME).setLevel(loglevel)
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "saleor.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "saleor.custom_settings")
 
 app = Celery("saleor")
 

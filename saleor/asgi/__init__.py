@@ -12,7 +12,7 @@ from django.core.asgi import get_asgi_application
 
 from saleor.asgi.health_check import health_check
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "saleor.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "saleor.custom_settings")
 
 application = get_asgi_application()
 application = health_check(application, "/health/")
